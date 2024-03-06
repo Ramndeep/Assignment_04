@@ -59,6 +59,7 @@ try:
                     customer_data[customer_id] = {'balance': 0, 'transactions': []}
 
                 # Update the customer's account balance based on the transaction type
+                # modified the conditions for updating the balance based on transaction type.
                 if transaction_type == 'deposit':
                     customer_data[customer_id]['balance'] += transaction_amount
                     total_transaction_amount += transaction_amount
@@ -70,8 +71,8 @@ try:
                 customer_data[customer_id]['transactions'].append((transaction_amount, transaction_type))
             else:
             ### COLLECT INVALID RECORDS ###
-                tuple = (row),(error_message)
-                rejected_records += tuple
+                tuple = (row,error_message)
+                rejected_records.append(tuple)
 # Adding except block      
 except FileNotFoundError as e:
     print(f"ERROR: {e} - File not found.")
@@ -95,3 +96,5 @@ print(f"\nAVERAGE TRANSACTION AMOUNT: {(total_transaction_amount / transaction_c
 print("\nREJECTED RECORDS\n================")
 for record in rejected_records:
     print("REJECTED:", record)
+
+    
