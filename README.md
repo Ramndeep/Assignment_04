@@ -57,3 +57,9 @@ A tuple containing the record causing the error and the error message is appende
 else:
     tuple = (),(error_message)
     rejected_records += tuple
+
+### Program throws ZeroDivisionError.
+- **Changes Made**:
+  - Incremented `transaction_counter` inside the valid record block to fix the ZeroDivisionError.
+  - Added a check to ensure `transaction_counter` is not zero before calculating the average transaction amount.
+- **Purpose**: Resolved the division by zero error and ensured accurate calculation of the average transaction amount.

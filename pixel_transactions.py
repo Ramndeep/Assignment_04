@@ -21,7 +21,7 @@ error_message = ''
 os.system('cls' if os.name == 'nt' else 'clear')
 
 try:
-    with open('ban_data.csv', 'r') as csv_file:
+    with open('bank_data.csv', 'r') as csv_file:
         reader = csv.reader(csv_file)
         for row in reader:
             # Reset valid record and error message for each iteration
@@ -51,6 +51,8 @@ try:
 
             if valid_record:
                 # Initialize the customer's account balance if it doesn't already exist
+                transaction_counter += 1
+                
                 if customer_id not in customer_data:
                     customer_data[customer_id] = {'balance': 0, 'transactions': []}
 
