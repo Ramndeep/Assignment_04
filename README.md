@@ -55,7 +55,8 @@ except Exception as e:
 A tuple containing the record causing the error and the error message is appended to the list.]
 
 else:
-    tuple = (),(error_message)
+    tuple = (row),(error_message)
+
     rejected_records += tuple
 
 ### Program throws ZeroDivisionError.
@@ -63,3 +64,21 @@ else:
   - Incremented `transaction_counter` inside the valid record block to fix the ZeroDivisionError.
   - Added a check to ensure `transaction_counter` is not zero before calculating the average transaction amount.
 - **Purpose**: Resolved the division by zero error and ensured accurate calculation of the average transaction amount.
+
+## Code Modifications:
+
+1. **Header Row Skip:**
+   - Skipped the header row using `next(reader, None)` to avoid validation on the header.
+
+2. **Transaction Count Increment Removal:**
+   - Removed the unnecessary increment of `transaction_count`.
+
+3. **Total Transaction Amount Calculation:**
+   - Adjusted the calculation of `total_transaction_amount` to include both deposits and withdrawals.
+
+4. **Balance Update Conditions:**
+   - Modified the conditions for updating the balance based on the transaction type.
+
+   ## Purpose of Changes:
+
+[The changes aim to improve the functionality and accuracy of the program. Skipping the header row avoids unnecessary validation on non-transaction data, and adjustments to the balance update conditions ensure correct handling of both deposits and withdrawals. The removal of the unnecessary increment of `transaction_count` streamlines the code.]

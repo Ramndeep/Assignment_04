@@ -23,6 +23,8 @@ os.system('cls' if os.name == 'nt' else 'clear')
 try:
     with open('bank_data.csv', 'r') as csv_file:
         reader = csv.reader(csv_file)
+        # skiping the header Row
+        next(reader, None)
         for row in reader:
             # Reset valid record and error message for each iteration
             valid_record = True
@@ -52,27 +54,24 @@ try:
             if valid_record:
                 # Initialize the customer's account balance if it doesn't already exist
                 transaction_counter += 1
-                
+
                 if customer_id not in customer_data:
                     customer_data[customer_id] = {'balance': 0, 'transactions': []}
 
                 # Update the customer's account balance based on the transaction type
-                elif transaction_type == 'deposit':
+                if transaction_type == 'deposit':
                     customer_data[customer_id]['balance'] += transaction_amount
-                    transaction_count += 1
                     total_transaction_amount += transaction_amount
-                elif transaction_type == 'withdrawal':
-                    customer_data[customer_id]['balance'] += transaction_amount
-                    transaction_count += 1
+                elif transaction_type == 'withdraw':
+                    customer_data[customer_id]['balance'] -= transaction_amount
                     total_transaction_amount += transaction_amount
                 
                 # Record  transactions in the customer's transaction history
                 customer_data[customer_id]['transactions'].append((transaction_amount, transaction_type))
             else:
             ### COLLECT INVALID RECORDS ###
-                tuple = (),(error_message)
+                tuple = (row),(error_message)
                 rejected_records += tuple
-                
 # Adding except block      
 except FileNotFoundError as e:
     print(f"ERROR: {e} - File not found.")
