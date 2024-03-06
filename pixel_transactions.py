@@ -33,11 +33,21 @@ try:
             
             # Extract the transaction type from the second column
             transaction_type = row[1]
-            ### VALIDATION 1 ###
 
+            ### VALIDATION 1 ###
+            # Transaction Type Validation
+            if transaction_type not in valid_transaction_types:
+                valid_record = False
+                error_message += "Invalid transaction type. "
+            
             # Extract the transaction amount from the third column
             ### VALIDATION 2 ###
-            transaction_amount = float(row[2])
+            #Transaction Amount Validation
+            try:   
+                transaction_amount = float(row[2])
+            except ValueError:
+                valid_record = False
+                error_message += "Non-numeric transaction amount. "
 
             if valid_record:
                 # Initialize the customer's account balance if it doesn't already exist
@@ -56,8 +66,10 @@ try:
                 
                 # Record  transactions in the customer's transaction history
                 customer_data[customer_id]['transactions'].append((transaction_amount, transaction_type))
-            
+            else:
             ### COLLECT INVALID RECORDS ###
+                tuple = (),(error_message)
+                rejected_records += tuple
                 
 # Adding except block      
 except FileNotFoundError as e:
