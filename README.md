@@ -70,8 +70,8 @@ else:
 1. **Header Row Skip:**
    - Skipped the header row using `next(reader, None)` to avoid validation on the header.
 
-2. **Transaction Count Increment Removal:**
-   - Removed the unnecessary increment of `transaction_count`.
+2. **variables name corrrection**
+   - corrected the name of two variable 
 
 3. **Total Transaction Amount Calculation:**
    - Adjusted the calculation of `total_transaction_amount` to include both deposits and withdrawals.

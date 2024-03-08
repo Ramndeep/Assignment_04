@@ -2,7 +2,7 @@
 Description: A program that reads through transaction records and reports the results.
 Author: ACE Faculty
 Edited by: {Ramandeep kaur}
-Date: {Date}
+Date: {02/03/2024}
 Usage: This program will read transaction data from a .csv file, summarize and 
 report the results.
 """
@@ -53,8 +53,6 @@ try:
 
             if valid_record:
                 # Initialize the customer's account balance if it doesn't already exist
-                transaction_counter += 1
-
                 if customer_id not in customer_data:
                     customer_data[customer_id] = {'balance': 0, 'transactions': []}
 
@@ -62,9 +60,11 @@ try:
                 # modified the conditions for updating the balance based on transaction type.
                 if transaction_type == 'deposit':
                     customer_data[customer_id]['balance'] += transaction_amount
+                    transaction_count +=1
                     total_transaction_amount += transaction_amount
                 elif transaction_type == 'withdraw':
                     customer_data[customer_id]['balance'] -= transaction_amount
+                    transaction_count +=1
                     total_transaction_amount += transaction_amount
                 
                 # Record  transactions in the customer's transaction history
@@ -91,7 +91,7 @@ for customer_id, data in customer_data.items():
         amount, type = transaction
         print(f"\t{type.capitalize()}: {amount}")
 
-print(f"\nAVERAGE TRANSACTION AMOUNT: {(total_transaction_amount / transaction_counter)}")
+print(f"\nAVERAGE TRANSACTION AMOUNT: {(total_transaction_amount / transaction_count)}")
 
 print("\nREJECTED RECORDS\n================")
 for record in rejected_records:
